@@ -1,0 +1,16 @@
+# =============================================================================
+# Contoh isi CONFIG_YML (disimpan sebagai base64 di GitHub Secret "CONFIG_YML")
+#
+# Cara encode:
+#   base64 -w0 config.yml
+#
+# File ini TIDAK di-commit berisi nilai asli; hanya contoh struktur.
+# =============================================================================
+
+tunnel: <UUID_TUNNEL_ANDA>            # sama dengan secret UUID_TUNNEL
+credentials-file: /home/runner/.cloudflared/<UUID_TUNNEL_ANDA>.json
+
+ingress:
+  - hostname: ai.train.axn.cc.cd
+    service: http://127.0.0.1:8000
+  - service: http_status:404          # catch-all wajib di akhir

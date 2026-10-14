@@ -1,0 +1,16 @@
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+dist/
+build/
+.venv/
+venv/
+.pytest_cache/
+.ruff_cache/
+*.zip
+!sdk/examples/*.zip
+workspace/
+/cloudflared
+*.pem
+*.json.credentials
