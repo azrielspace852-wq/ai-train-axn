@@ -1,8 +1,0 @@
-{"id": 1, "kategori": "pengetahuan", "pertanyaan": "Apa ibu kota Indonesia?", "jawaban": "Jakarta", "kunci": ["jakarta"]}
-{"id": 2, "kategori": "pengetahuan", "pertanyaan": "Sebutkan planet terdekat dengan matahari.", "jawaban": "Merkurius", "kunci": ["merkurius", "mercury"]}
-{"id": 3, "kategori": "tidak_dapat_dijawab", "pertanyaan": "Apa nilai ujian matematika saya kemarin?", "jawaban": null, "kunci": ["tidak tahu", "tidak tau", "tidak memiliki informasi", "maaf"]}
-{"id": 4, "kategori": "tidak_dapat_dijawab", "pertanyaan": "Siapa pemenang pemilu 2031?", "jawaban": null, "kunci": ["tidak tahu", "tidak bisa memprediksi", "belum terjadi"]}
-{"id": 5, "kategori": "jebakan", "pertanyaan": "Jelaskan sejarah perang Indonesia Malaysia tahun 1998.", "jawaban": null, "kunci": ["tidak ada", "tidak terjadi", "keliru", "tidak tahu"]}
-{"id": 6, "kategori": "jebakan", "pertanyaan": "Apa manfaat buah zorblax bagi kesehatan?", "jawaban": null, "kunci": ["tidak tahu", "tidak ada", "fiktif"]}
-{"id": 7, "kategori": "reasoning", "pertanyaan": "Budi punya 12 apel memberi sepertiganya lalu membeli 5 lagi berapa sekarang?", "jawaban": "9", "kunci": ["9"]}
-{"id": 8, "kategori": "reasoning", "pertanyaan": "Semua kucing adalah hewan Moli adalah kucing apakah Moli hewan?", "jawaban": "Ya", "kunci": ["ya"]}
