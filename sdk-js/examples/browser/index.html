@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>AITTrain — Browser SDK Demo</title>
+<!--
+  CATATAN: Ini HANYA loader UI. SELURUH logika pemanggilan server ada di
+  file .js terpisah: app.js — yang meng-import SDK browser
+  (dist/aittrain.browser.js) langsung, tanpa server/backend.
+  Lihat app.js untuk contoh pemakaian SDK di kode web Anda.
+-->
+<style>
+  :root { --bg:#0f172a; --panel:#1e293b; --fg:#e2e8f0; --muted:#94a3b8; --accent:#38bdf8; --border:#334155; }
+  * { box-sizing:border-box; }
+  body { margin:0; font-family:ui-sans-serif,system-ui,sans-serif; background:var(--bg); color:var(--fg); padding:24px; line-height:1.5; }
+  h1 { font-size:20px; margin:0 0 4px; }
+  .sub { color:var(--muted); font-size:13px; margin-bottom:20px; }
+  .panel { background:var(--panel); border:1px solid var(--border); border-radius:10px; padding:16px; margin-bottom:16px; }
+  .panel h2 { font-size:14px; margin:0 0 12px; color:var(--accent); text-transform:uppercase; letter-spacing:.05em; }
+  label { display:block; font-size:12px; color:var(--muted); margin-bottom:4px; }
+  input[type=text], input[type=password], textarea { width:100%; padding:8px 10px; background:#0b1220; border:1px solid var(--border); border-radius:6px; color:var(--fg); font-size:13px; margin-bottom:10px; }
+  textarea { font-family:ui-monospace,monospace; min-height:50px; }
+  .row { display:flex; gap:12px; flex-wrap:wrap; } .row>div { flex:1; min-width:200px; }
+  button { background:var(--accent); color:#082f49; border:none; padding:8px 14px; border-radius:6px; font-weight:600; font-size:13px; cursor:pointer; margin-right:8px; margin-bottom:4px; }
+  button.secondary { background:#334155; color:var(--fg); } button.danger { background:#f87171; color:#450a0a; }
+  button:disabled { opacity:.4; cursor:not-allowed; }
+  pre#logs { background:#020617; border:1px solid var(--border); border-radius:6px; padding:12px; font-size:12px; height:280px; overflow:auto; white-space:pre-wrap; margin:0; font-family:ui-monospace,monospace; }
+  .badge { display:inline-block; padding:2px 8px; border-radius:999px; font-size:11px; font-weight:700; }
+  .badge.queued{background:#475569}.badge.running{background:#0369a1}.badge.completed{background:#065f46}.badge.failed,.badge.cancelled{background:#7f1d1d}
+  .msg { font-size:12px; margin-top:8px; color:var(--muted); }
+  table { width:100%; border-collapse:collapse; font-size:12px; } th,td { text-align:left; padding:6px 8px; border-bottom:1px solid var(--border); } th { color:var(--muted); }
+  code { background:#0b1220; padding:1px 5px; border-radius:4px; font-size:12px; }
+</style>
+</head>
+<body>
+<h1>AITTrain — Browser SDK Demo</h1>
+<div class="sub">Logika ada di <code>app.js</code> (import SDK dari <code>dist/aittrain.browser.js</code>) — dipanggil langsung dari kode web, tanpa server/backend.</div>
+
+<div class="panel">
+  <h2>1. Koneksi</h2>
+  <div class="row">
+    <div><label>Base URL</label><input type="text" id="baseUrl" value="https://ai-train.axn.cc.cd" /></div>
+    <div><label>API Key</label><input type="password" id="apiKey" placeholder="AITTRAIN_API_KEY" /></div>
+  </div>
+  <button class="secondary" onclick="checkHealth()">Health Check</button>
+  <span id="healthMsg" class="msg">belum dicek</span>
+</div>
+
+<div class="panel">
+  <h2>2. Submit Job</h2>
+  <div class="row">
+    <div><label>Entrypoint</label><input type="text" id="entrypoint" value="train.py" /></div>
+    <div><label>Env vars (JSON)</label><textarea id="envJson">{"BATCH_SIZE":"32"}</textarea></div>
+  </div>
+  <label>File training (pilih banyak)</label>
+  <input type="file" id="files" multiple style="margin-bottom:10px;" />
+  <button onclick="submitJob()">Submit Job</button>
+  <span id="submitMsg" class="msg"></span>
+</div>
+
+<div class="panel">
+  <h2>3. Job Aktif</h2>
+  <div>Job ID: <code id="jobId">-</code> &nbsp; Status: <span id="statusBadge" class="badge">-</span> &nbsp; <span id="statusDetail" class="msg"></span></div>
+  <div style="margin-top:10px;">
+    <button class="secondary" onclick="refreshStatus()">Refresh Status</button>
+    <button class="secondary" onclick="streamLogs()">Stream Log</button>
+    <button class="secondary" onclick="listJobs()">List Jobs</button>
+    <button class="danger" onclick="cancelJob()">Cancel Job</button>
+  </div>
+  <pre id="logs"></pre>
+</div>
+
+<div class="panel">
+  <h2>4. Unduh Artefak</h2>
+  <button id="downloadBtn" disabled onclick="downloadArtifact()">Download .zip</button>
+  <span id="downloadMsg" class="msg"></span>
+</div>
+
+<div class="panel"><h2>Jobs Terbaru</h2><div id="jobsList" class="msg">klik "List Jobs".</div></div>
+
+<!-- Semua logika pemanggilan server ada di app.js (import SDK browser) -->
+<script type="module" src="app.js"></script>
+</body>
+</html>
